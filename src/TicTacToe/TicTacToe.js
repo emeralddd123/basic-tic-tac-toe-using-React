@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './TicTacToe.css'
 
 const TicTacToe = () => {
-  const { turn, setTurn } = useState('x')
+  const [ turn, setTurn ] = useState('x')
 
   const handleClick = (num) => {
     if (turn === 'x') {
