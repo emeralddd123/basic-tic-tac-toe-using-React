@@ -2,23 +2,54 @@ import React, { useState } from 'react'
 import './TicTacToe.css'
 
 const TicTacToe = () => {
-  const [ turn, setTurn ] = useState('x')
+  const [turn, setTurn] = useState('x')
   const [cells, setCells] = useState(Array(9).fill(''))
 
+  const checkForWinner = (squares) => {
+    let combos = {
+      across: [
+        [0, 1, 2],
+        [3, 4, 5],
+        [6, 7, 8]],
+      down: [
+        [0,3,6],
+        [1,4,7],
+        [2,5,8]
+      ],
+      diagonal: [
+        [0,4,8],
+        [2,4,6]
+      ],
+    }
+
+    for (let combo in combos) {
+      combos[combo].forEach((pattern) => {
+        console.log(pattern)
+      })
+    }
+  }
+
   const handleClick = (num) => {
+    if (cells[num] !== '') {
+      alert('Already Clicked!!')
+      return
+    }
     let squares = [...cells]
 
     if (turn === 'x') {
       squares[num] = 'x'
       setTurn('o')
     } else {
-      squares[num] = 'x'
+      squares[num] = 'o'
       setTurn('x')
     }
+
+    checkForWinner(squares)
+    setCells(squares)
   }
 
   const Cell = ({ num }) => {
-    return <td onClick={() => handleClick(num)}>-</td>
+    return <td onClick={() => handleClick(num)}>{cells[num]}</td>
   }
 
   return (
